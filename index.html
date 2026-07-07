@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>개레전드 축구 PVP</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="game" aria-label="개레전드 축구 경기장"></canvas>
+
+    <header class="scorebar">
+      <div class="team-pill home">
+        <span>HOME</span>
+        <strong id="homeScore">0</strong>
+      </div>
+      <div class="clock">
+        <strong id="clock">05:00</strong>
+        <span id="statusText">대기 중</span>
+      </div>
+      <div class="team-pill away">
+        <strong id="awayScore">0</strong>
+        <span>AWAY</span>
+      </div>
+    </header>
+
+    <aside class="side-panel">
+      <section class="room-panel">
+        <div>
+          <span class="label">ROOM</span>
+          <a id="roomCode" class="room-code-link" href="/" title="방 링크 열기">000000</a>
+        </div>
+        <button id="copyLink" type="button" title="초대 링크 복사">링크 복사</button>
+      </section>
+
+      <section class="players-panel">
+        <div class="panel-title">플레이어</div>
+        <div id="players"></div>
+      </section>
+
+      <section class="controls-panel">
+        <div class="panel-title">키</div>
+        <div class="key-grid">
+          <span>이동</span><b>방향키</b>
+          <span>질주</span><b>E</b>
+          <span>볼 지키기</span><b>C</b>
+          <span>패스</span><b>S</b>
+          <span>스루</span><b>W</b>
+          <span>로빙/크로스</span><b>A</b>
+          <span>슛/태클</span><b>D</b>
+          <span>감아차기</span><b>Z + D</b>
+          <span>지원 요청</span><b>Q</b>
+        </div>
+      </section>
+    </aside>
+
+    <section class="join-panel" id="joinPanel" aria-label="게임 참가">
+      <form id="joinForm">
+        <div class="brand-lockup">
+          <span class="crest">GL</span>
+          <div>
+            <h1>개레전드 축구 PVP</h1>
+            <p>브라우저 실시간 멀티플레이</p>
+          </div>
+        </div>
+        <label>
+          닉네임
+          <input id="nameInput" name="name" maxlength="14" autocomplete="nickname" placeholder="PLAYER" />
+        </label>
+        <label>
+          방 코드
+          <span class="room-input-row">
+            <input id="roomInput" name="room" maxlength="18" autocomplete="off" inputmode="numeric" placeholder="123456" />
+            <button id="copyJoinLink" class="secondary-action" type="button" title="숫자 초대 링크 복사">링크</button>
+          </span>
+        </label>
+        <div class="team-select" role="group" aria-label="팀 선택">
+          <button type="button" class="team-option" data-team="home">HOME</button>
+          <button type="button" class="team-option" data-team="away">AWAY</button>
+          <button type="button" class="team-option active" data-team="auto">자동</button>
+        </div>
+        <button class="primary-action" type="submit">입장</button>
+      </form>
+    </section>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="peerjs.min.js"></script>
+    <script type="module" src="client.js"></script>
+  </body>
+</html>
