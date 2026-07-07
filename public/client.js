@@ -938,6 +938,9 @@ function roomCodeFromUrl() {
   const queryRoom = sanitizeRoomCode(urlParams.get("room"));
   if (queryRoom) return queryRoom;
 
+  const hashRoom = sanitizeRoomCode(location.hash.replace(/^#\/?/, ""));
+  if (hashRoom) return hashRoom;
+
   const parts = decodeURIComponent(location.pathname).split("/").filter(Boolean);
   const last = parts.at(-1) || "";
   if (/^\d{4,18}$/.test(last)) return last;
@@ -971,8 +974,7 @@ function inviteUrlFor(room) {
 function publicPathForRoom(room) {
   const code = sanitizeRoomCode(room);
   const base = appBasePath();
-  if (/^\d{4,18}$/.test(code)) return `${base}/${code}`.replace(/\/{2,}/g, "/");
-  return `${base || "/" }?room=${encodeURIComponent(code || "MAIN")}`;
+  return `${base || "/"}?room=${encodeURIComponent(code || "MAIN")}`;
 }
 
 function setRoomCodeLink(room) {
